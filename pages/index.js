@@ -1,5 +1,8 @@
+/* eslint-disable react/no-unescaped-entities */
 import Head from 'next/head';
 import Layout, { siteTitle } from '../components/layout';
+import Link from 'next/link';
+import Date from '../components/date';
 import utilStyles from '../styles/utils.module.css';
 import { getSortedPostsData } from '../lib/posts';
 
@@ -30,9 +33,12 @@ export default function Home({ allPostsData }) {
         <ul className={utilStyles.list}>
           {allPostsData.map(({ id, title, date }) => (
             <li className={utilStyles.listItem} key={id}>
-              <div>{title}</div>
-              <div>{id}</div>
-              <div>{date}</div>
+              <div>
+                <Link href={`/posts/${id}`}>{title}</Link>
+              </div>
+              <small className={utilStyles.lightText}>
+                <Date dateString={date} />
+              </small>
             </li>
           ))}
         </ul>
